@@ -73,6 +73,25 @@ fi
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+### Set Computer name
+
+echo "Would you like to set your computer name (as done via System Preferences >> Sharing)?  (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  echo "What would you like it to be?"
+  read COMPUTER_NAME
+  sudo scutil --set ComputerName $COMPUTER_NAME
+  sudo scutil --set HostName $COMPUTER_NAME
+  sudo scutil --set LocalHostName $COMPUTER_NAME
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
+fi
+
+echo "Increasing sound quality for Bluetooth headphones/headsets"
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+### Disable display from automatically adjusting brightness
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
+
 
 ##############################
 # Prerequisite: Install Brew #
@@ -475,7 +494,8 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/nul
 # defaults write com.apple.driver.AppleBluetoothMultitouch.mouse.plist MouseOneFingerDoubleTapGesture -int 0
 # defaults write com.apple.driver.AppleBluetoothMultitouch.mouse.plist MouseTwoFingerDoubleTapGesture -int 3
 # defaults write com.apple.driver.AppleBluetoothMultitouch.mouse.plist MouseTwoFingerHorizSwipeGesture -int 2
-# defaults write ~/Library/Preferences/.GlobalPreferences.plist com.apple.mouse.scaling -float 3
+defaults write -g com.apple.trackpad.scaling 3
+defaults write ~/Library/Preferences/.GlobalPreferences.plist com.apple.mouse.scaling -float 3
 # defaults write ~/Library/Preferences/.GlobalPreferences.plist com.apple.swipescrolldirection -boolean NO
 
 
@@ -520,6 +540,10 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 # make symbolic links and change shell to zshell
 # ./makesymlinks.sh
 # upgrade_oh_my_zsh
+
+
+### Set fish as default shell
+chsh -s `which fish`
 
 
 echo ""

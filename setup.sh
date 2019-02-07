@@ -546,6 +546,9 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 which fish >> /etc/shells
 chsh -s `which fish`
 
+echo "Setting up AWS"
+brew install awscli
+aws configure
 
 echo ""
 cecho "Done!" $cyan

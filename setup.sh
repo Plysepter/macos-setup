@@ -543,6 +543,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 
 ### Set fish as default shell
+which fish >> /etc/shells
 chsh -s `which fish`
 
 

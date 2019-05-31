@@ -213,8 +213,8 @@ brew install fish
 # brew install python
 # brew install pyenv
 
-### Node
-brew install node
+# ### Node
+# brew install node
 
 
 ### Dev Editors 
@@ -334,9 +334,6 @@ fi
 # pip3 install --user pylint
 # pip3 install --user flake8
 
-echo "Installing global Node packages..."
-npm i -g @angular/cli
-
 
 #############################################
 ### Set OSX Preferences - Borrowed from https://github.com/mathiasbynens/dotfiles/blob/master/.macos
@@ -376,7 +373,7 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-time-modifier -float 0.3
 
 # Only Show Open Applications In The Dock  
-defaults write com.apple.dock static-only -bool true
+# defaults write com.apple.dock static-only -bool true
 
 # Display full POSIX path as Finder window title
 # defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -544,7 +541,38 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ### Set fish as default shell
 which fish >> /etc/shells
-chsh -s `which fish`
+chsh -s /usr/local/bin/fish
+
+## Configure fish
+
+# install fisher package manager
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+## theme
+fisher add matchai/spacefish
+
+echo 'set -g SPACEFISH_PACKAGE_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_JULIA_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_RUBY_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_HASKELL_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_HASKELL_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_CONDA_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_PHP_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_RUST_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_DOTNET_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_KUBECONTEXT_SHOW false' >> ~/.config/fish/config.fish
+echo 'set -g SPACEFISH_BATTERY_SHOW false' >> ~/.config/fish/config.fish
+
+## fish nvm
+fisher add jorgebucaran/fish-nvm
+nvm install --lts
+
+echo "Installing global Node packages..."
+npm i -g @angular/cli
+
+# add pisces
+fisher add laughedelic/pisces
+
+
 
 echo "Setting up AWS"
 brew install awscli

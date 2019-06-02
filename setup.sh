@@ -545,6 +545,10 @@ chsh -s /usr/local/bin/fish
 
 ## Configure fish
 
+## fish nvm
+fisher add jorgebucaran/fish-nvm
+nvm install --lts
+
 # install fisher package manager
 curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 ## theme
@@ -562,17 +566,11 @@ echo 'set -g SPACEFISH_DOTNET_SHOW false' >> ~/.config/fish/config.fish
 echo 'set -g SPACEFISH_KUBECONTEXT_SHOW false' >> ~/.config/fish/config.fish
 echo 'set -g SPACEFISH_BATTERY_SHOW false' >> ~/.config/fish/config.fish
 
-## fish nvm
-fisher add jorgebucaran/fish-nvm
-nvm install --lts
-
 echo "Installing global Node packages..."
 npm i -g @angular/cli
 
 # add pisces
 fisher add laughedelic/pisces
-
-
 
 echo "Setting up AWS"
 brew install awscli

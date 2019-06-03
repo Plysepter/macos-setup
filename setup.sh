@@ -540,17 +540,18 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 
 ### Set fish as default shell
-which fish >> /etc/shells
+echo "/usr/local/bin/fish" >> /etc/shells
 chsh -s /usr/local/bin/fish
 
 ## Configure fish
+
+# install fisher package manager
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 
 ## fish nvm
 fisher add jorgebucaran/fish-nvm
 nvm install --lts
 
-# install fisher package manager
-curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 ## theme
 fisher add matchai/spacefish
 

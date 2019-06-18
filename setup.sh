@@ -206,6 +206,7 @@ echo "Starting brew app install..."
 ### Command line tools - install new ones, update others to latest version
 brew install git  # upgrade to latest
 # brew install git-lfs # track large files in git https://github.com/git-lfs/git-lfs
+brew install zsh # get latest
 brew install fish
 
 
@@ -367,8 +368,6 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool true
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 
-# Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
 # Speed up display animation
 defaults write com.apple.dock autohide-time-modifier -float 0.3
 
